@@ -1,0 +1,25 @@
+Uma coisa que não estou entendendo bem, pelo menos do curso que fiz, foi a necessidade de fazer algo para
+componente com lazy loading. "Mas o componente com lazy loading não sabe da existencia de X parte da sua
+aplicação", que diferença isso faz?
+Se for um dado que é carregado nesse componente de lazy loading, mas que de alguma forma deverá ser usado
+fora dele, não faz mais sentido descer os niveis e carregar ele antes?
+
+Mas entendi que pra esses componentes preciso usar o forFeature, e que no forFeature eu vou declarar o
+slice do store que quero buscar. Ai no reducer, o state criado nele, preciso dizer que ele extends o
+state principal da aplicação, provavelmente no appReducer ou em outro, para ai sim poder utilizar algo
+de outros states dentro da feature selecionada no modulo.
+
+Mas ainda assim algumas coisas são confusas, na minha cabeça o store do ngrx é algo separado da aplicação
+e não tem por que complicar isso na hora de ensinar.
+
+enfim, visualizar também nos reducers e actions algumas explicações, mas vou deixar algumas aqui:
+
+Um reducer criado através da função de createReducer. A partir do ngrx 10 (eu acho) eles mudaram para
+criar reducers e actions com funções. Recebe como argumento inicial o estado inicial do reducer, e
+como segundo argumento em diante os on(), que são funções que servem como um switch, para dizer que
+quando uma ação X for disparada, ele deve exercutar o callback declarado em frente a ele.
+
+A partir da versão 10 (creio eu) do ngrx é preciso criar ações com createAction. Ela recebe o tipo
+da ação e as props que devem ser passadas pra ela. Assim, no meu reducer, sei o que estou recebendo.
+As props precisam receber um objeto pelo visto, mas não necessáriamente precisam de um payload. eu vou
+manter com o nome de payload exclusivamente por como estava no formato antigo de NGRX

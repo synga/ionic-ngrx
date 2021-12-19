@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Treinos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="exercises$ | async as exercises; else noExercises">
+    <h2>Escolha um exercício para começar seu treino</h2>
+    <ion-item>
+      <ion-select
+        placeholder="Escolha"
+        okText="Ok"
+        cancelText="Cancelar"
+        interface="alert"
+        [(ngModel)]="selectedExercise"
+      >
+        <ion-select-option
+          *ngFor="let exercise of exercises"
+          [value]="exercise"
+        >
+          {{exercise.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <ng-template #noExercises>
+    <h2>
+      Não há exercicios disponiveis, cadastre novos exercicios na aba
+      "Gerenciar"
+    </h2>
+  </ng-template>
+</ion-content>
