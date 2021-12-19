@@ -7,7 +7,7 @@ export interface Training {
   /**
    * Id do documento no Firebase
    */
-  id: string;
+  id?: string;
   /**
    * Dados do exercicio realizado
    */
@@ -15,9 +15,9 @@ export interface Training {
   /**
    * Se o exercicio foi realizado ou cancelado
    */
-  status: 'completed' | 'cancelled' | null;
+  status: 'completed' | 'cancelled' | 'started';
   /**
    * Data do serviço realizado
    */
-  date: number;
+  date: Date;
 }

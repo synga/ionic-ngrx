@@ -8,6 +8,7 @@
   <div *ngIf="exercises$ | async as exercises; else noExercises">
     <h2>Escolha um exercício para começar seu treino</h2>
     <ion-item>
+      <ion-label>Escolha um exercicio</ion-label>
       <ion-select
         placeholder="Escolha"
         okText="Ok"
@@ -23,6 +24,20 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
+
+    <div class="save-button">
+      <ion-button
+        type="button"
+        fill="outline"
+        size="default"
+        shape="round"
+        color="success"
+        [disabled]="!selectedExercise"
+        (click)="startExercise()"
+      >
+        Começar treino
+      </ion-button>
+    </div>
   </div>
   <ng-template #noExercises>
     <h2>

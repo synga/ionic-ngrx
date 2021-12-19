@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ongoing-training</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>Treino Em Andamento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <section *ngIf="training">{{training.exercise.name}}</section>
 </ion-content>
