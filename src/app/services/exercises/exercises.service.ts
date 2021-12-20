@@ -5,7 +5,7 @@ import { ComponentsService } from '../components/components.service';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as fromExercise from './exercises.reducer';
-import { SetExercises } from './exercises.actions';
+import { SetEditingExercise, SetExercises } from './exercises.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -51,12 +51,28 @@ export class ExercisesService {
     }
   }
 
+  async updateExercise(uid: string, exercise: Exercise) {
+    return this.db.collection('exercises').doc(uid).update(exercise);
+  }
+
+  deleteExercise(id: string) {
+    this.db.collection('exercises').doc(id).delete();
+  }
+
   /**
    * Retorna o array de exercicios como um observable.
    * Dou um select no store passando o seletor de getExercises
    */
   getExercises() {
     return this._store.select(fromExercise.getExercises);
+  }
+
+  getEditingExercise() {
+    return this._store.select(fromExercise.getEditingExercise);
+  }
+
+  async storeEditingExercise(exercise: Exercise) {
+    await this._store.dispatch(SetEditingExercise({ payload: exercise }));
   }
 
   /**

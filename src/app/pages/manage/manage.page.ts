@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Exercise } from 'src/app/interfaces/exercise.model';
 import { ExercisesService } from 'src/app/services/exercises/exercises.service';
@@ -11,7 +13,12 @@ import { ExercisesService } from 'src/app/services/exercises/exercises.service';
 export class ManagePage implements OnInit {
   public exercises$: Observable<Exercise[]>;
 
-  constructor(private _exercises: ExercisesService) {}
+  constructor(
+    private _exercises: ExercisesService,
+    private _router: Router,
+    private route: ActivatedRoute,
+    private _alert: AlertController
+  ) {}
 
   /**
    * Ao inicializar o componente, chamo o metodo o no serviço de exercises que me retorna um observavel
@@ -19,5 +26,33 @@ export class ManagePage implements OnInit {
    */
   ngOnInit(): void {
     this.exercises$ = this._exercises.getExercises();
+  }
+
+  async editExercise(exercise: Exercise) {
+    await this._exercises.storeEditingExercise(exercise);
+    this._router.navigate(['edit-exercise'], {
+      relativeTo: this.route,
+    });
+  }
+
+  async deleteExercise(id: string) {
+    const alert = this._alert.create({
+      backdropDismiss: true,
+      header: 'Deseja realmente excluir esse exercício?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this._exercises.deleteExercise(id);
+          },
+        },
+      ],
+    });
+
+    (await alert).present();
   }
 }

@@ -9,10 +9,6 @@ import { take } from 'rxjs/operators';
  * - fazer esse componente
  * - - completar o treino e salvar
  * - - cancelar o treino e salvar
- * - - como fazer isso com o backbutton do ionic?
- * - - tenho ainda algum navguard ou algo do ionic para executar antes de voltar a pagina?
- * - - faço com o authguards do proprio angular?
- * - - qualquer coisa ao invés de usar o backbutton, uso um botão normal e trato a navegação aqui
  */
 @Component({
   selector: 'app-ongoing-training',
@@ -24,6 +20,7 @@ export class OngoingTrainingPage implements OnInit {
    * Dados do treino em andamento
    */
   public training: Training;
+
   constructor(private _training: TrainigsService) {}
 
   /**

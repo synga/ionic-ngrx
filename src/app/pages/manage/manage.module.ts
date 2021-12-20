@@ -8,6 +8,7 @@ import { ManagePage } from './manage.page';
 
 import { ManagePageRoutingModule } from './manage-routing.module';
 import { exerciseReducer } from 'src/app/services/exercises/exercises.reducer';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { exerciseReducer } from 'src/app/services/exercises/exercises.reducer';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentsModule,
     RouterModule.forChild([{ path: '', component: ManagePage }]),
     ManagePageRoutingModule,
     StoreModule.forFeature('exercises', exerciseReducer),

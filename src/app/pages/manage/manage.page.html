@@ -8,12 +8,19 @@
   <ion-list *ngIf="exercises$ | async as exercises">
     <ion-item-sliding *ngFor="let exercise of exercises">
       <ion-item>
+        <ion-icon
+          [name]="exercise.exerciseType === 'duration' ? 'timer' : 'body'"
+          slot="start"
+        ></ion-icon>
         <ion-label>{{exercise.name}}</ion-label>
         <ion-note slot="end" color="tertiary">{{exercise.calories}}</ion-note>
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option color="warning">
+        <ion-item-option color="danger" (click)="deleteExercise(exercise.id)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="warning" (click)="editExercise(exercise)">
           <ion-icon slot="icon-only" name="create"></ion-icon>
         </ion-item-option>
       </ion-item-options>

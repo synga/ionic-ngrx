@@ -6,57 +6,7 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="saveNewExercise()" [formGroup]="form">
-    <ion-list>
-      <!-- nome -->
-      <ion-item>
-        <ion-label position="floating">Nome</ion-label>
-        <ion-input formControlName="name"></ion-input>
-      </ion-item>
-      <!-- tipo -->
-      <ion-item>
-        <ion-label position="floating">É por duração ou repetição?</ion-label>
-        <ion-select
-          placeholder="Escolha"
-          okText="Ok"
-          cancelText="Cancelar"
-          interface="popover"
-          formControlName="exerciseType"
-        >
-          <ion-select-option value="duration">Duração</ion-select-option>
-          <ion-select-option value="repetition">Repetição</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <!-- switch de duração de acordo com tipo -->
-      <ng-container [ngSwitch]="form.get('exerciseType').value">
-        <ion-item *ngSwitchCase="'duration'">
-          <ion-label position="floating">Duração (em segundos)</ion-label>
-          <ion-input type="number" formControlName="setQuantity"></ion-input>
-        </ion-item>
-        <ion-item *ngSwitchCase="'repetition'">
-          <ion-label position="floating">Fazer quantas vezes?</ion-label>
-          <ion-input type="number" formControlName="setQuantity"></ion-input>
-        </ion-item>
-      </ng-container>
-      <!-- calorias -->
-      <ion-item>
-        <ion-label position="floating">
-          Calorias gastas ao completar?
-        </ion-label>
-        <ion-input type="number" formControlName="calories"></ion-input>
-      </ion-item>
-    </ion-list>
-    <div class="save-button">
-      <ion-button
-        type="submit"
-        fill="outline"
-        size="default"
-        shape="round"
-        color="success"
-        [disabled]="!form.valid"
-      >
-        Salvar
-      </ion-button>
-    </div>
-  </form>
+  <app-exercise-form
+    (exerciseData)="saveNewExercise($event)"
+  ></app-exercise-form>
 </ion-content>

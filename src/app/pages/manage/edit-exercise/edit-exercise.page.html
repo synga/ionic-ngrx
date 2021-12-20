@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>edit-exercise</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>Editar Exercício</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <app-exercise-form
+    [exercise]="exercise"
+    (exerciseData)="updateExercise($event)"
+  ></app-exercise-form>
 </ion-content>
