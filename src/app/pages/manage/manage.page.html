@@ -9,7 +9,7 @@
     <ion-item-sliding *ngFor="let exercise of exercises">
       <ion-item>
         <ion-icon
-          [name]="exercise.exerciseType === 'duration' ? 'timer' : 'body'"
+          [name]="exerciseIconMap.get(exercise.type)"
           slot="start"
         ></ion-icon>
         <ion-label>{{exercise.name}}</ion-label>

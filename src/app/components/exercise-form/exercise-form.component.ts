@@ -23,7 +23,7 @@ export class ExerciseFormComponent implements OnInit {
    */
   public form: FormGroup = new FormGroup({
     name: new FormControl(null, Validators.required),
-    exerciseType: new FormControl('duration', Validators.required),
+    type: new FormControl('duration', Validators.required),
     setQuantity: new FormControl(null, Validators.required),
     calories: new FormControl(null, Validators.required),
   });

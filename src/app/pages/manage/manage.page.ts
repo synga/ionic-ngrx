@@ -11,6 +11,11 @@ import { ExercisesService } from 'src/app/services/exercises/exercises.service';
   styleUrls: ['manage.page.scss'],
 })
 export class ManagePage implements OnInit {
+  public exerciseIconMap: Map<string, string> = new Map([
+    ['duration', 'timer'],
+    ['repetition', 'body'],
+  ]);
+
   public exercises$: Observable<Exercise[]>;
 
   constructor(

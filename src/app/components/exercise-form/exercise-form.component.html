@@ -14,14 +14,14 @@
           okText="Ok"
           cancelText="Cancelar"
           interface="popover"
-          formControlName="exerciseType"
+          formControlName="type"
         >
           <ion-select-option value="duration">Duração</ion-select-option>
           <ion-select-option value="repetition">Repetição</ion-select-option>
         </ion-select>
       </ion-item>
       <!-- switch de duração de acordo com tipo -->
-      <ng-container [ngSwitch]="form.get('exerciseType').value">
+      <ng-container [ngSwitch]="form.get('type').value">
         <ion-item *ngSwitchCase="'duration'">
           <ion-label position="floating">Duração (em segundos)</ion-label>
           <ion-input type="number" formControlName="setQuantity"></ion-input>

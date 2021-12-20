@@ -13,7 +13,7 @@ export interface Exercise {
   /**
    * Qual o tipo do exercicio, se ele é realizado por repetição ou por duração
    */
-  exerciseType: 'duration' | 'repetition' | null;
+  type: 'duration' | 'repetition' | null;
   /**
    * Quantidade de vezes para ser realizado, pode ser o tempo em segundos ou quantas repetições
    */
