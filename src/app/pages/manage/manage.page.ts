@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Exercise } from 'src/app/interfaces/exercise.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { ExercisesService } from 'src/app/services/exercises/exercises.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class ManagePage implements OnInit {
     private _exercises: ExercisesService,
     private _router: Router,
     private route: ActivatedRoute,
-    private _alert: AlertController
+    private _alert: AlertController,
+    private _auth: AuthService
   ) {}
 
   /**
@@ -59,5 +61,9 @@ export class ManagePage implements OnInit {
     });
 
     (await alert).present();
+  }
+
+  logout() {
+    this._auth.logout();
   }
 }

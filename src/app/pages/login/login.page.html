@@ -1,0 +1,37 @@
+<ion-content>
+  <h2>Entre com a sua conta</h2>
+  <form (ngSubmit)="login()" [formGroup]="loginform">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div>
+      <ion-button
+        shape="round"
+        fill="outline"
+        color="success"
+        type="submit"
+        [disabled]="!loginform.valid"
+      >
+        Entrar
+      </ion-button>
+    </div>
+  </form>
+  <hr />
+  <p>Não tem uma conta? Crie uma agora mesmo</p>
+  <ion-button
+    fill="outline"
+    color="dark"
+    expand="block"
+    shape="round"
+    routerLink="signup"
+  >
+    Criar conta
+  </ion-button>
+</ion-content>

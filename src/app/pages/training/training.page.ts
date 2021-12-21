@@ -7,6 +7,7 @@ import * as fromExercise from '../../services/exercises/exercises.reducer';
 import { ExercisesService } from 'src/app/services/exercises/exercises.service';
 import { TrainigsService } from 'src/app/services/trainings/trainings.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-training',
@@ -28,7 +29,8 @@ export class TrainingPage {
     private _exercises: ExercisesService,
     private _trainings: TrainigsService,
     private _router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _auth: AuthService
   ) {}
 
   /**
@@ -47,5 +49,9 @@ export class TrainingPage {
     this._router.navigate(['ongoing'], {
       relativeTo: this.route,
     });
+  }
+
+  logout() {
+    this._auth.logout();
   }
 }
