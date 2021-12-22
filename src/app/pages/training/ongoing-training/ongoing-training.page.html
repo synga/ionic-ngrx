@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button slot="start" fill="clear">
+    <ion-button slot="start" fill="clear" (click)="cancelTraining()">
       <ion-icon slot="icon-only" name="arrow-back" color="dark"></ion-icon>
     </ion-button>
     <ion-title>Treino Em Andamento</ion-title>
@@ -8,5 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <section *ngIf="training">{{training.exercise.name}}</section>
+  <section *ngIf="training">
+    <div [ngSwitch]="training.exercise.type">
+      <ng-container *ngSwitchCase="'repetition'">
+        {{training.exercise.name}} | {{training.exercise.type}}
+      </ng-container>
+      <ng-container *ngSwitchCase="'duration'">
+        {{training.exercise.name}} | {{training.exercise.type}}
+      </ng-container>
+    </div>
+  </section>
 </ion-content>

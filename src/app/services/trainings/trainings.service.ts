@@ -19,9 +19,12 @@ export class TrainigsService {
       date: new Date(),
       exercise,
       status: 'started',
+      userId: exercise.userId,
     };
 
-    return this._store.dispatch(SetCurrentTraining({ payload: training }));
+    return await this._store.dispatch(
+      SetCurrentTraining({ payload: training })
+    );
   }
 
   /**

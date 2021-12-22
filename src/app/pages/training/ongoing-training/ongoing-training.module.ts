@@ -13,8 +13,8 @@ import { OngoingTrainingPage } from './ongoing-training.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    OngoingTrainingPageRoutingModule
+    OngoingTrainingPageRoutingModule,
   ],
-  declarations: [OngoingTrainingPage]
+  declarations: [OngoingTrainingPage],
 })
 export class OngoingTrainingPageModule {}

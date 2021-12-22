@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { AuthService } from './services/auth/auth.service';
 import { ExercisesService } from './services/exercises/exercises.service';
 
 @Component({
@@ -10,9 +11,9 @@ import { ExercisesService } from './services/exercises/exercises.service';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private _exercises: ExercisesService,
     private _router: Router,
-    private ngAuth: AngularFireAuth
+    private ngAuth: AngularFireAuth,
+    private _auth: AuthService
   ) {}
 
   /**
@@ -20,12 +21,12 @@ export class AppComponent implements OnInit {
    */
   ngOnInit(): void {
     this.checkUserAuth();
-    this._exercises.loadExercises();
   }
 
   checkUserAuth() {
     this.ngAuth.onAuthStateChanged((auth) => {
       if (auth) {
+        this._auth.setUserId(auth.uid);
         this._router.navigate(['/']);
       } else {
         this._router.navigate(['login']);

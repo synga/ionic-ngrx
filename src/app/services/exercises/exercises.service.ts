@@ -5,7 +5,9 @@ import { ComponentsService } from '../components/components.service';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as fromExercise from './exercises.reducer';
+import * as fromAuth from '../auth/auth.reducer';
 import { SetEditingExercise, SetExercises } from './exercises.actions';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,22 +16,25 @@ export class ExercisesService {
   constructor(
     private db: AngularFirestore,
     private _components: ComponentsService,
-    private _store: Store<fromExercise.State>
+    private _store: Store<fromAuth.State>,
+    private _auth: AuthService
   ) {}
 
   /**
    * Vai criar o observavel do próprio firebase, e a cada novo exercicio ou exercicio alterado, vai
    * atualizar os exercicios no store do NGRX
    */
-  loadExercises(): void {
-    this.db
-      .collection('exercises')
-      .snapshotChanges()
-      .pipe(map(this.mapFirestoreExerciseArray))
-      .subscribe((exercises: Exercise[]) => {
-        // dispatch é o que salva os dados no store disparando uma ação que recebe um payload.
-        this._store.dispatch(SetExercises({ payload: exercises }));
-      });
+  loadExercises() {
+    this._auth.getUserId().subscribe((userId) => {
+      this.db
+        .collection('exercises', (ref) => ref.where('userId', '==', userId))
+        .snapshotChanges()
+        .pipe(map(this.mapFirestoreExerciseArray))
+        .subscribe((exercises: Exercise[]) => {
+          // dispatch é o que salva os dados no store disparando uma ação que recebe um payload.
+          this._store.dispatch(SetExercises({ payload: exercises }));
+        });
+    });
   }
 
   async saveNewExercise(exercise: Exercise) {
@@ -42,7 +47,6 @@ export class ExercisesService {
       await this._components.stopLoading();
       return successAlert.present();
     } catch (error) {
-      console.log('error', error);
       const errorAlert = await this._components.createSimpleAlertMessage({
         header: 'Exercicio salvo com sucesso',
       });

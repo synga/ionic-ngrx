@@ -1,6 +1,8 @@
 import { Exercise } from 'src/app/interfaces/exercise.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-exercise-form',
@@ -28,15 +30,24 @@ export class ExerciseFormComponent implements OnInit {
     calories: new FormControl(null, Validators.required),
   });
 
-  constructor() {}
+  constructor(private _auth: AuthService) {}
 
   ngOnInit() {
     this.form.patchValue(this.exercise);
   }
 
-  checkFormAndEmit() {
+  async checkFormAndEmit() {
     if (this.form.valid) {
-      this.exerciseData.emit(this.form.value as Exercise);
+      this._auth
+        .getUserId()
+        .pipe(take(1))
+        .subscribe((userId) => {
+          const exercise: Exercise = {
+            ...this.form.value,
+            userId,
+          };
+          this.exerciseData.emit(exercise);
+        });
     }
   }
 }

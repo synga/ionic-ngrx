@@ -1,10 +1,7 @@
-import {
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-} from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 import * as fromTrainings from './services/trainings/trainings.reducer';
 import * as fromExercises from './services/exercises/exercises.reducer';
+import * as fromAuth from './services/auth/auth.reducer';
 
 /**
  * Crio a interface do state geral da aplicação, aqui vão conter os "acessos" e qual o tipo de state de
@@ -13,6 +10,7 @@ import * as fromExercises from './services/exercises/exercises.reducer';
 export interface State {
   trainings: fromTrainings.TrainingState;
   exercises: fromExercises.ExerciseState;
+  auth: fromAuth.AuthState;
 }
 
 /**
@@ -22,4 +20,5 @@ export interface State {
 export const reducers: ActionReducerMap<State> = {
   trainings: fromTrainings.trainingReducer,
   exercises: fromExercises.exerciseReducer,
+  auth: fromAuth.authReducer,
 };

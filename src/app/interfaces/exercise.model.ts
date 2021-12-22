@@ -22,4 +22,6 @@ export interface Exercise {
    * Calorias gastas ao completar o exercicio.
    */
   calories: number;
+
+  userId?: string;
 }

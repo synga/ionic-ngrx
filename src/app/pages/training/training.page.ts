@@ -15,6 +15,11 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['training.page.scss'],
 })
 export class TrainingPage {
+  public exerciseTypeMap: Map<string, string> = new Map([
+    ['duration', '(DUR)'],
+    ['repetition', '(REP)'],
+  ]);
+
   /**
    * Lista de exercicios cadastrados
    */
@@ -46,7 +51,7 @@ export class TrainingPage {
    */
   async startExercise() {
     await this._trainings.startNewTraining(this.selectedExercise);
-    this._router.navigate(['ongoing'], {
+    this._router.navigate(['/tabs/exercises/ongoing'], {
       relativeTo: this.route,
     });
   }

@@ -20,4 +20,5 @@ export interface Training {
    * Data do serviço realizado
    */
   date: Date;
+  userId?: string;
 }
